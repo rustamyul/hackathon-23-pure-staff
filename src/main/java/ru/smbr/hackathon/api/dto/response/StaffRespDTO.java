@@ -1,13 +1,17 @@
-package ru.smbr.hackathon.dto;
+package ru.smbr.hackathon.api.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StaffDTO {
+public class StaffRespDTO {
+
+    private UUID id;
 
     private String name;
 
@@ -16,4 +20,6 @@ public class StaffDTO {
     private String aboutMe;
 
     private String photo;
+
+    private String technologyStack;
 }

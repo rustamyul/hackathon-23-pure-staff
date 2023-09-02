@@ -1,4 +1,4 @@
-package ru.smbr.hackathon.dto;
+package ru.smbr.hackathon.api.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VacancyDTO {
+public class VacancyReqDTO {
 
     private String jobTitle;
 

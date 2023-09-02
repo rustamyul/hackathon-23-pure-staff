@@ -1,13 +1,15 @@
-package ru.smbr.hackathon.service;
+package ru.smbr.hackathon.api.controller;
 
-import ru.smbr.hackathon.api.dto.response.StaffRespDTO;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.smbr.hackathon.api.dto.request.StaffReqDTO;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
+import ru.smbr.hackathon.api.dto.response.StaffRespDTO;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface StaffService {
+@RequestMapping("/api/v1/staff")
+public interface StaffApi {
 
     StaffRespDTO create(StaffReqDTO staffDTO);
 

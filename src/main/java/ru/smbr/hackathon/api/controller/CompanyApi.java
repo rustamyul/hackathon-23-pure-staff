@@ -1,13 +1,15 @@
-package ru.smbr.hackathon.service;
+package ru.smbr.hackathon.api.controller;
 
-import ru.smbr.hackathon.api.dto.response.CompanyRespDTO;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.smbr.hackathon.api.dto.request.CompanyReqDTO;
+import ru.smbr.hackathon.api.dto.response.CompanyRespDTO;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface CompanyService {
+@RequestMapping("/api/v1/companies")
+public interface CompanyApi {
 
     CompanyRespDTO create(CompanyReqDTO companyDTO);
 
@@ -18,4 +20,5 @@ public interface CompanyService {
     CompanyRespDTO update(CompanyReqDTO companyDTO, UUID id);
 
     DeleteResponse delete(UUID id);
+
 }
