@@ -17,21 +17,15 @@ import javax.persistence.Table;
 @Table(name = "staff")
 public class StaffEntity extends AbstractEntity {
 
-    @Column(name = "key_comp_sum")
-    Integer keyCompSum;
-
-    @Column(name = "key_self")
-    Integer keySelf;
-
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "specialization")
-    String specialization;
+    private String specialization;
 
     @Column(name = "about_me")
-    String aboutMe;
+    private String aboutMe;
 
     @Column(name = "photo")
-    String photo;
+    private String photo;
 }
