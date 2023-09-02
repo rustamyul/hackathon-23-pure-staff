@@ -8,6 +8,7 @@ import ru.smbr.hackathon.api.dto.request.VacancyRequest;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
 import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
 import ru.smbr.hackathon.api.dto.response.VacancyResponse;
+import ru.smbr.hackathon.exception.ApplicationNotFoundException;
 import ru.smbr.hackathon.model.VacancyEntity;
 import ru.smbr.hackathon.repository.VacancyRepository;
 import ru.smbr.hackathon.service.VacancyService;
@@ -36,7 +37,8 @@ public class VacancyServiceImpl implements VacancyService {
 
         VacancyEntity vacancy = vacancyRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ApplicationNotFoundException("getById",
+                "VacancyEntity not found, vacancy-id - " + id));
 
         return vacancyMapper.toVacancyResponse(vacancy);
     }
@@ -57,7 +59,9 @@ public class VacancyServiceImpl implements VacancyService {
 
         VacancyEntity vacancyToUpdate = vacancyRepository
                 .findById(id)
-                .get();
+                .orElseThrow(() -> new ApplicationNotFoundException("update",
+                        "VacancyEntity not found, vacancy-id - " + id));
+
         vacancyMapper.updateVacancyEntity(vacancyToUpdate, vacancyRequest);
         return vacancyMapper.toVacancyResponse(vacancyToUpdate);
     }
@@ -67,7 +71,8 @@ public class VacancyServiceImpl implements VacancyService {
 
         VacancyEntity vacancyToDelete = vacancyRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ApplicationNotFoundException("delete",
+                        "VacancyEntity not found, vacancy-id - " + id));
 
         vacancyRepository.delete(vacancyToDelete);
         return new DeleteResponse();

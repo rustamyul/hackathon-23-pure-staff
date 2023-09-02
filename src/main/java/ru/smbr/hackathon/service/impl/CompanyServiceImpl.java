@@ -8,6 +8,7 @@ import ru.smbr.hackathon.api.dto.request.CompanyRequest;
 import ru.smbr.hackathon.api.dto.response.CompanyResponse;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
 import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
+import ru.smbr.hackathon.exception.ApplicationNotFoundException;
 import ru.smbr.hackathon.model.CompanyEntity;
 import ru.smbr.hackathon.repository.CompanyRepository;
 import ru.smbr.hackathon.service.CompanyService;
@@ -36,7 +37,8 @@ public class CompanyServiceImpl implements CompanyService {
 
         CompanyEntity company = companyRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ApplicationNotFoundException("getById",
+                        "CompanyEntity not found, company-id - " + id));
 
         return companyMapper.toCompanyResponse(company);
     }
@@ -57,7 +59,9 @@ public class CompanyServiceImpl implements CompanyService {
 
         CompanyEntity companyToUpdate = companyRepository
                 .findById(id)
-                .get();
+                .orElseThrow(() -> new ApplicationNotFoundException("update",
+                        "CompanyEntity not found, company-id - " + id));
+
         companyMapper.updateCompanyEntity(companyToUpdate, companyRequest);
         return companyMapper.toCompanyResponse(companyToUpdate);
     }
@@ -67,7 +71,8 @@ public class CompanyServiceImpl implements CompanyService {
 
         CompanyEntity companyToDelete = companyRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ApplicationNotFoundException("delete",
+                        "CompanyEntity not found, company-id - " + id));
 
         companyRepository.delete(companyToDelete);
         return new DeleteResponse();
