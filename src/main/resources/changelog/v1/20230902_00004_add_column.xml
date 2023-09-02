@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <databaseChangeLog
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <include file="v1/20230902_00001_init_db.xml" relativeToChangelogFile="true"/>
-    <include file="v1/20230902_00002_init_db.xml" relativeToChangelogFile="true"/>
-    <include file="v1/20230902_00003_init_db.xml" relativeToChangelogFile="true"/>
-    <include file="v1/20230902_00004_add_column.xml" relativeToChangelogFile="true"/>
-
+    <changeSet id="4" author="rustam.yuldashev" context="Delete columns">
+        <addColumn tableName="staff">
+            <column name="technology_stacks" type="varchar(64) []"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

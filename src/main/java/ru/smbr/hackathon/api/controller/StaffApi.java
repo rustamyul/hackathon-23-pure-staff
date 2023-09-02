@@ -1,30 +1,29 @@
 package ru.smbr.hackathon.api.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.smbr.hackathon.api.dto.request.StaffReqDTO;
+import ru.smbr.hackathon.api.dto.request.StaffRequest;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
-import ru.smbr.hackathon.api.dto.response.StaffRespDTO;
+import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
+import ru.smbr.hackathon.api.dto.response.StaffResponse;
 
-import java.util.List;
 import java.util.UUID;
 
-//@RequestMapping("/api/v1/staff")
-@RequestMapping("/staff")
+@RequestMapping("/api/v1/staff")
 public interface StaffApi {
 
     @PostMapping
-    StaffRespDTO create(@RequestBody StaffReqDTO staffDTO);
+    StaffResponse create(@RequestBody StaffRequest staffDTO);
 
     @GetMapping("/{id}")
-    StaffRespDTO getById(@PathVariable("id") UUID id);
+    StaffResponse getById(@PathVariable("id") UUID id);
 
     @GetMapping
-    List<StaffRespDTO> getAll(@RequestParam(value = "page") int page,
-                              @RequestParam(value = "size")int size);
+    PageOfListResponse<StaffResponse> getAll(@RequestParam(value = "page") int page,
+                                             @RequestParam(value = "size") int size);
 
     @PutMapping("/{id}")
-    StaffRespDTO update(@RequestBody StaffReqDTO staffDTO,
-                        @PathVariable("id") UUID id);
+    StaffResponse update(@RequestBody StaffRequest staffDTO,
+                         @PathVariable("id") UUID id);
 
     @DeleteMapping("/{id}")
     DeleteResponse delete(@PathVariable("id") UUID id);

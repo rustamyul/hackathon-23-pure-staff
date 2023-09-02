@@ -1,8 +1,10 @@
 package ru.smbr.hackathon.util.mapper;
 
-import org.mapstruct.*;
-import ru.smbr.hackathon.api.dto.request.VacancyReqDTO;
-import ru.smbr.hackathon.api.dto.response.VacancyRespDTO;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import ru.smbr.hackathon.api.dto.request.VacancyRequest;
+import ru.smbr.hackathon.api.dto.response.VacancyResponse;
 import ru.smbr.hackathon.model.VacancyEntity;
 
 import java.util.Collection;
@@ -14,15 +16,13 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 @Mapper(componentModel = "spring", uses = {CompanyMapper.class})
 public interface VacancyMapper {
 
-    VacancyRespDTO toVacancyRespDTO(VacancyEntity entity);
+    VacancyResponse toVacancyResponse(VacancyEntity vacancy);
 
-    List<VacancyRespDTO> toVacancyResponseList(Collection<VacancyEntity> vacancy);
+    List<VacancyResponse> toVacancyResponseList(Collection<VacancyEntity> vacancy);
 
-    VacancyEntity toVacancyEntity(VacancyReqDTO request);
+    VacancyEntity toVacancyEntity(VacancyRequest request);
 
     @BeanMapping(nullValueCheckStrategy = ALWAYS,
             nullValuePropertyMappingStrategy = IGNORE)
-    void updateVacancyEntity(@MappingTarget VacancyEntity entity, VacancyReqDTO request);
-
-    VacancyResponse toVacancyResponse(VacancyEntity vacancy);
+    void updateVacancyEntity(@MappingTarget VacancyEntity entity, VacancyRequest request);
 }

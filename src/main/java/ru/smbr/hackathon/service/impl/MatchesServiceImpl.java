@@ -18,7 +18,6 @@ import ru.smbr.hackathon.service.MatchesService;
 import ru.smbr.hackathon.util.mapper.StaffMapper;
 import ru.smbr.hackathon.util.mapper.VacancyMapper;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

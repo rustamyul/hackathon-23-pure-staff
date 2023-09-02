@@ -21,4 +21,6 @@ public class StaffResponse {
     private String aboutMe;
 
     private String photo;
+
+    private String[] technologyStack;
 }

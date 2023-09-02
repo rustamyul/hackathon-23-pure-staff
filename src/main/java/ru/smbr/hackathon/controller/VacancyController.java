@@ -3,13 +3,12 @@ package ru.smbr.hackathon.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import ru.smbr.hackathon.api.controller.VacancyApi;
-import ru.smbr.hackathon.api.dto.request.VacancyReqDTO;
+import ru.smbr.hackathon.api.dto.request.VacancyRequest;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
-import ru.smbr.hackathon.api.dto.response.VacancyRespDTO;
-import ru.smbr.hackathon.service.CompanyService;
+import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
+import ru.smbr.hackathon.api.dto.response.VacancyResponse;
 import ru.smbr.hackathon.service.VacancyService;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -17,23 +16,24 @@ import java.util.UUID;
 public class VacancyController implements VacancyApi {
 
     private final VacancyService vacancyService;
+
     @Override
-    public VacancyRespDTO create(VacancyReqDTO vacancyDTO) {
+    public VacancyResponse create(VacancyRequest vacancyDTO) {
         return vacancyService.create(vacancyDTO);
     }
 
     @Override
-    public VacancyRespDTO getById(UUID id) {
+    public VacancyResponse getById(UUID id) {
         return vacancyService.getById(id);
     }
 
     @Override
-    public List<VacancyRespDTO> getAll(int page, int size) {
+    public PageOfListResponse<VacancyResponse> getAll(int page, int size) {
         return vacancyService.getAll(page, size);
     }
 
     @Override
-    public VacancyRespDTO update(VacancyReqDTO vacancyDTO, UUID id) {
+    public VacancyResponse update(VacancyRequest vacancyDTO, UUID id) {
         return vacancyService.update(vacancyDTO, id);
     }
 

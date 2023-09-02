@@ -3,11 +3,9 @@ package ru.smbr.hackathon.util.mapper;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import ru.smbr.hackathon.api.dto.request.CompanyReqDTO;
-import ru.smbr.hackathon.api.dto.request.VacancyReqDTO;
-import ru.smbr.hackathon.api.dto.response.CompanyRespDTO;
+import ru.smbr.hackathon.api.dto.request.CompanyRequest;
+import ru.smbr.hackathon.api.dto.response.CompanyResponse;
 import ru.smbr.hackathon.model.CompanyEntity;
-import ru.smbr.hackathon.model.VacancyEntity;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,22 +13,17 @@ import java.util.List;
 import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
-import org.mapstruct.Mapper;
-import ru.smbr.hackathon.api.dto.response.CompanyResponse;
-import ru.smbr.hackathon.model.CompanyEntity;
-
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {
 
-    CompanyRespDTO toCompanyRespDTO(CompanyEntity entity);
+    CompanyResponse toCompanyResponse(CompanyEntity company);
 
-    List<CompanyRespDTO> toСompanyResponses(Collection<CompanyEntity> companies);
+    List<CompanyResponse> toСompanyResponseList(Collection<CompanyEntity> companies);
 
-    CompanyEntity toCompanyEntity(CompanyReqDTO request);
+    CompanyEntity toCompanyEntity(CompanyRequest request);
 
     @BeanMapping(nullValueCheckStrategy = ALWAYS,
             nullValuePropertyMappingStrategy = IGNORE)
-    void updateCompanyEntity(@MappingTarget CompanyEntity entity, CompanyReqDTO request);
+    void updateCompanyEntity(@MappingTarget CompanyEntity entity, CompanyRequest request);
 
-    CompanyResponse toCompanyResponse(CompanyEntity company);
 }

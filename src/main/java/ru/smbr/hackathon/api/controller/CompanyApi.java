@@ -1,30 +1,29 @@
 package ru.smbr.hackathon.api.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.smbr.hackathon.api.dto.request.CompanyReqDTO;
-import ru.smbr.hackathon.api.dto.response.CompanyRespDTO;
+import ru.smbr.hackathon.api.dto.request.CompanyRequest;
+import ru.smbr.hackathon.api.dto.response.CompanyResponse;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
+import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
 
-import java.util.List;
 import java.util.UUID;
 
-//@RequestMapping("/api/v1/companies")
-@RequestMapping("/company")
+@RequestMapping("/api/v1/companies")
 public interface CompanyApi {
 
     @PostMapping
-    CompanyRespDTO create(@RequestBody CompanyReqDTO companyDTO);
+    CompanyResponse create(@RequestBody CompanyRequest companyDTO);
 
     @GetMapping("/{id}")
-    CompanyRespDTO getById(@PathVariable("id") UUID id);
+    CompanyResponse getById(@PathVariable("id") UUID id);
 
     @GetMapping
-    List<CompanyRespDTO> getAll(@RequestParam(value = "page") int page,
-                                @RequestParam(value = "size") int size);
+    PageOfListResponse<CompanyResponse> getAll(@RequestParam(value = "page") int page,
+                                               @RequestParam(value = "size") int size);
 
     @PutMapping("/{id}")
-    CompanyRespDTO update(@RequestBody CompanyReqDTO companyDTO,
-                          @PathVariable("id") UUID id);
+    CompanyResponse update(@RequestBody CompanyRequest companyDTO,
+                           @PathVariable("id") UUID id);
 
     @DeleteMapping("/{id}")
     DeleteResponse delete(@PathVariable("id") UUID id);
