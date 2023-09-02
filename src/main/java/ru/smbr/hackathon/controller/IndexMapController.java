@@ -1,4 +1,4 @@
-package ru.smbr.hackathon.controllers;
+package ru.smbr.hackathon.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
