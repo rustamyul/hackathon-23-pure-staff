@@ -15,23 +15,17 @@ import javax.persistence.*;
 @Table(name = "vacancy")
 public class VacancyEntity extends AbstractEntity{
 
-    @Column(name = "key_empl_sum")
-    Integer keyEmplSum;
-
-    @Column(name = "key_self")
-    Integer keySelf;
-
     @Column(name = "job_title")
-    String jobTitle;
+    private String jobTitle;
 
     @Column(name = "specialization")
-    String specialization;
+    private String specialization;
 
-
-    String[] requirements;
+    @Column(name = "requirements")
+    private String[] requirements;
 
     @Column(name = "pay_fork")
-    Integer payFork;
+    private Integer payFork;
 
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)

@@ -18,20 +18,20 @@ import javax.persistence.Table;
 public class CompanyEntity extends AbstractEntity{
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "rating")
-    Double rating;
+    private Double rating;
 
     @Column(name = "foundation")
-    Integer foundation;
+    private Integer foundation;
 
     @Column(name = "specialization")
-    String specialization;
+    private String specialization;
 
     @Column(name = "description")
-    String description;
+    private String description;
 
     @Column(name = "url")
-    String url;
+    private String url;
 }
