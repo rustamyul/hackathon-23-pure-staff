@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1" author="rustam.yuldashev" context="Create table">
+        <createTable tableName="company">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="rating" type="double"/>
+            <column name="foundation" type="varchar"/>
+            <column name="specialization" type="varchar"/>
+            <column name="description" type="varchar"/>
+            <column name="url" type="varchar"/>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"
+                    defaultValueComputed="NOW()" remarks="Дата добавления"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE"
+                    defaultValueComputed="NOW()" remarks="Дата последнего обновления"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="rustam.yuldashev" context="Create table">
+        <createTable tableName="vacancy">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="key_empl_sum" type="int"/>
+            <column name="key_self" type="int"/>
+            <column name="specialization" type="varchar"/>
+            <column name="job_title" type="varchar"/>
+            <column name="requirements" type="varchar(64) []"/>
+            <column name="pay_fork" type="int"/>
+            <column name="company_id" type="uuid">
+                <constraints foreignKeyName="FK_vacancy_company_id"
+                             referencedTableName="company"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"
+                    defaultValueComputed="NOW()" remarks="Дата добавления"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE"
+                    defaultValueComputed="NOW()" remarks="Дата последнего обновления"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="rustam.yuldashev" context="Create table">
+        <createTable tableName="staff">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="key_empl_sum" type="int"/>
+            <column name="key_self" type="int"/>
+            <column name="specialization" type="varchar"/>
+            <column name="about_me" type="varchar"/>
+            <column name="photo" type="varchar"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE"
+                    defaultValueComputed="NOW()" remarks="Дата последнего обновления"/>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"
+                    defaultValueComputed="NOW()" remarks="Дата добавления"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
