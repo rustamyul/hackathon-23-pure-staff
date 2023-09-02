@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="4" author="rustam.yuldashev" context="Create table">
+        <createTable tableName="matches">
+            <column name="staff_id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="PK_LIKE"
+                             foreignKeyName="FK_matches_staff_id"
+                             referencedTableName="staff"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="vacancy_id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="PK_LIKE"
+                             foreignKeyName="FK_matches_vacancy_id"
+                             referencedTableName="vacancy"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="staff_is_like" type="boolean"/>
+            <column name="vacancy_is_like" type="boolean"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

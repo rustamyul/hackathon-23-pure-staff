@@ -7,5 +7,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="v1/20230902_00001_init_db.xml" relativeToChangelogFile="true"/>
+    <include file="v1/20230902_00002_init_db.xml" relativeToChangelogFile="true"/>
+    <include file="v1/20230902_00003_init_db.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

@@ -11,7 +11,7 @@ import java.util.List;
 import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CompanyMapper.class})
 public interface VacancyMapper {
 
     VacancyRespDTO toVacancyRespDTO(VacancyEntity entity);
@@ -23,4 +23,6 @@ public interface VacancyMapper {
     @BeanMapping(nullValueCheckStrategy = ALWAYS,
             nullValuePropertyMappingStrategy = IGNORE)
     void updateVacancyEntity(@MappingTarget VacancyEntity entity, VacancyReqDTO request);
+
+    VacancyResponse toVacancyResponse(VacancyEntity vacancy);
 }

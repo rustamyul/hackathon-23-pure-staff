@@ -21,7 +21,7 @@ public class VacancyEntity extends AbstractEntity{
     @Column(name = "specialization")
     private String specialization;
 
-
+    @Column(name = "requirements")
     private String[] requirements;
 
     @Column(name = "pay_fork")

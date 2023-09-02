@@ -15,6 +15,10 @@ import java.util.List;
 import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
+import org.mapstruct.Mapper;
+import ru.smbr.hackathon.api.dto.response.CompanyResponse;
+import ru.smbr.hackathon.model.CompanyEntity;
+
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {
 
@@ -27,4 +31,6 @@ public interface CompanyMapper {
     @BeanMapping(nullValueCheckStrategy = ALWAYS,
             nullValuePropertyMappingStrategy = IGNORE)
     void updateCompanyEntity(@MappingTarget CompanyEntity entity, CompanyReqDTO request);
+
+    CompanyResponse toCompanyResponse(CompanyEntity company);
 }

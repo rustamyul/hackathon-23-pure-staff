@@ -24,4 +24,6 @@ public interface StaffMapper {
     @BeanMapping(nullValueCheckStrategy = ALWAYS,
             nullValuePropertyMappingStrategy = IGNORE)
     void updateStaffEntity(@MappingTarget StaffEntity entity, StaffReqDTO request);
+
+    StaffResponse toStaffResponse(StaffEntity staff);
 }
