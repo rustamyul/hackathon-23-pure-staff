@@ -68,7 +68,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public DeleteResponse delete(UUID id) {
-
+        //БД на запрос удалить несущ строку даст ошибку -ее и перехватывать (1 запрос вместо 2) update()- то же самое
         CompanyEntity companyToDelete = companyRepository
                 .findById(id)
                 .orElseThrow(() -> new ApplicationNotFoundException("delete",
