@@ -2,6 +2,8 @@ package ru.smbr.hackathon.service.implementation;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.smbr.hackathon.api.dto.request.StaffReqDTO;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
@@ -43,8 +45,8 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<StaffRespDTO> getAll(int page, int size) {
 
-        List<StaffEntity> staff = staffRepository.findAll();
-        return staffMapper.toStaffResponses(staff);
+        Page<StaffEntity> staff = staffRepository.findAll(PageRequest.of(page, size));
+        return staffMapper.toStaffResponseList(staff.getContent());
     }
 
     @Override

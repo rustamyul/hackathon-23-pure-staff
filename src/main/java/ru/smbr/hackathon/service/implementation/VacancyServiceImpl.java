@@ -2,6 +2,8 @@ package ru.smbr.hackathon.service.implementation;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.smbr.hackathon.api.dto.request.VacancyReqDTO;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
@@ -44,8 +46,8 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<VacancyRespDTO> getAll(int page, int size) {
 
-        List<VacancyEntity> vacancies = vacancyRepository.findAll();
-        return vacancyMapper.toVacancyResponses(vacancies);
+        Page<VacancyEntity> vacancies = vacancyRepository.findAll(PageRequest.of(page, size));
+        return vacancyMapper.toVacancyResponseList(vacancies.getContent());
     }
 
     @Override

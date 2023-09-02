@@ -16,7 +16,7 @@ public interface VacancyMapper {
 
     VacancyRespDTO toVacancyRespDTO(VacancyEntity entity);
 
-    List<VacancyRespDTO> toVacancyResponses(Collection<VacancyEntity> vacancy);
+    List<VacancyRespDTO> toVacancyResponseList(Collection<VacancyEntity> vacancy);
 
     VacancyEntity toVacancyEntity(VacancyReqDTO request);
 

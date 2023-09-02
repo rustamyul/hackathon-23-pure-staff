@@ -2,6 +2,8 @@ package ru.smbr.hackathon.service.implementation;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.smbr.hackathon.api.dto.request.CompanyReqDTO;
 import ru.smbr.hackathon.api.dto.response.CompanyRespDTO;
@@ -43,8 +45,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<CompanyRespDTO> getAll(int page, int size) {
 
-        List<CompanyEntity> companies = companyRepository.findAll();
-        return companyMapper.toСompanyResponses(companies);
+        Page<CompanyEntity> companies = companyRepository.findAll(PageRequest.of(page, size));
+        return companyMapper.toСompanyResponses(companies.getContent());
     }
 
     @Override
