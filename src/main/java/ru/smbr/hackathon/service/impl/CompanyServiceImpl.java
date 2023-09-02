@@ -1,13 +1,13 @@
-package ru.smbr.hackathon.service.implementation;
+package ru.smbr.hackathon.service.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ru.smbr.hackathon.api.dto.request.CompanyReqDTO;
-import ru.smbr.hackathon.api.dto.response.CompanyRespDTO;
+import ru.smbr.hackathon.api.dto.request.CompanyRequest;
+import ru.smbr.hackathon.api.dto.response.CompanyResponse;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
+import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
 import ru.smbr.hackathon.model.CompanyEntity;
 import ru.smbr.hackathon.repository.CompanyRepository;
 import ru.smbr.hackathon.service.CompanyService;
@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
 @AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
 
@@ -25,38 +24,42 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyMapper companyMapper;
 
     @Override
-    public CompanyRespDTO create(CompanyReqDTO companyRequest) {
+    public CompanyResponse create(CompanyRequest companyRequest) {
 
         CompanyEntity newCompany = companyMapper.toCompanyEntity(companyRequest);
         companyRepository.save(newCompany);
-        return companyMapper.toCompanyRespDTO(newCompany);
+        return companyMapper.toCompanyResponse(newCompany);
     }
 
     @Override
-    public CompanyRespDTO getById(UUID id) {
+    public CompanyResponse getById(UUID id) {
 
         CompanyEntity company = companyRepository
                 .findById(id)
                 .orElseThrow();
 
-        return companyMapper.toCompanyRespDTO(company);
+        return companyMapper.toCompanyResponse(company);
     }
 
     @Override
-    public List<CompanyRespDTO> getAll(int page, int size) {
+    public PageOfListResponse<CompanyResponse> getAll(int page, int size) {
 
-        Page<CompanyEntity> companies = companyRepository.findAll(PageRequest.of(page, size));
-        return companyMapper.toСompanyResponses(companies.getContent());
+        Page<CompanyEntity> pageOfCompanies = companyRepository.findAll(PageRequest.of(page, size));
+        return PageOfListResponse.<CompanyResponse>builder()
+                .elements(companyMapper.toСompanyResponseList(pageOfCompanies.getContent()))
+                .size(size)
+                .totalPage(pageOfCompanies.getTotalPages())
+                .build();
     }
 
     @Override
-    public CompanyRespDTO update(CompanyReqDTO companyRequest, UUID id) {
+    public CompanyResponse update(CompanyRequest companyRequest, UUID id) {
 
         CompanyEntity companyToUpdate = companyRepository
                 .findById(id)
                 .get();
         companyMapper.updateCompanyEntity(companyToUpdate, companyRequest);
-        return companyMapper.toCompanyRespDTO(companyToUpdate);
+        return companyMapper.toCompanyResponse(companyToUpdate);
     }
 
     @Override

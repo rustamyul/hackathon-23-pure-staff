@@ -1,30 +1,29 @@
 package ru.smbr.hackathon.api.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.smbr.hackathon.api.dto.request.VacancyReqDTO;
+import ru.smbr.hackathon.api.dto.request.VacancyRequest;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
-import ru.smbr.hackathon.api.dto.response.VacancyRespDTO;
+import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
+import ru.smbr.hackathon.api.dto.response.VacancyResponse;
 
-import java.util.List;
 import java.util.UUID;
 
-//@RequestMapping("/api/v1/vacancies")
-@RequestMapping("/vacancy")
+@RequestMapping("/api/v1/vacancies")
 public interface VacancyApi {
 
     @PostMapping
-    VacancyRespDTO create(@RequestBody VacancyReqDTO vacancyDTO);
+    VacancyResponse create(@RequestBody VacancyRequest vacancyDTO);
 
     @GetMapping("/{id}")
-    VacancyRespDTO getById(@PathVariable("id") UUID id);
+    VacancyResponse getById(@PathVariable("id") UUID id);
 
     @GetMapping
-    List<VacancyRespDTO> getAll(@RequestParam(value = "page") int page,
-                                @RequestParam(value = "size") int size);
+    PageOfListResponse<VacancyResponse> getAll(@RequestParam(value = "page") int page,
+                                               @RequestParam(value = "size") int size);
 
     @PutMapping("/{id}")
-    VacancyRespDTO update(@RequestBody VacancyReqDTO vacancyDTO,
-                          @PathVariable("id") UUID id);
+    VacancyResponse update(@RequestBody VacancyRequest vacancyDTO,
+                           @PathVariable("id") UUID id);
 
     @DeleteMapping("/{id}")
     DeleteResponse delete(@PathVariable("id") UUID id);

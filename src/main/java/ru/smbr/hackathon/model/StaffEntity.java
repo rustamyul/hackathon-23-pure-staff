@@ -29,6 +29,6 @@ public class StaffEntity extends AbstractEntity {
     @Column(name = "photo")
     private String photo;
 
-    @Column(name = "technology_stack")
-    private String technologyStack;
+    @Column(name = "technology_stacks")
+    private String[] technologyStacks;
 }

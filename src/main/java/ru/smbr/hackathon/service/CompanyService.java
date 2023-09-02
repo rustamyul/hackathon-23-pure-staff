@@ -1,21 +1,22 @@
 package ru.smbr.hackathon.service;
 
-import ru.smbr.hackathon.api.dto.response.CompanyRespDTO;
-import ru.smbr.hackathon.api.dto.request.CompanyReqDTO;
+import ru.smbr.hackathon.api.dto.request.CompanyRequest;
+import ru.smbr.hackathon.api.dto.response.CompanyResponse;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
+import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface CompanyService {
 
-    CompanyRespDTO create(CompanyReqDTO companyDTO);
+    CompanyResponse create(CompanyRequest companyDTO);
 
-    CompanyRespDTO getById(UUID id);
+    CompanyResponse getById(UUID id);
 
-    List<CompanyRespDTO> getAll(int page, int size);
+    PageOfListResponse<CompanyResponse> getAll(int page, int size);
 
-    CompanyRespDTO update(CompanyReqDTO companyDTO, UUID id);
+    CompanyResponse update(CompanyRequest companyDTO, UUID id);
 
     DeleteResponse delete(UUID id);
 }

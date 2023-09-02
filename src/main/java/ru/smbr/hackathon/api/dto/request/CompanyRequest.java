@@ -1,13 +1,13 @@
 package ru.smbr.hackathon.api.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
-public class CompanyReqDTO {
+@NoArgsConstructor
+public class CompanyRequest {
 
     private String name;
 

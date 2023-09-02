@@ -1,23 +1,21 @@
-package ru.smbr.hackathon.service.implementation;
+package ru.smbr.hackathon.service.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ru.smbr.hackathon.api.dto.request.VacancyReqDTO;
+import ru.smbr.hackathon.api.dto.request.VacancyRequest;
 import ru.smbr.hackathon.api.dto.response.DeleteResponse;
-import ru.smbr.hackathon.api.dto.response.VacancyRespDTO;
+import ru.smbr.hackathon.api.dto.response.PageOfListResponse;
+import ru.smbr.hackathon.api.dto.response.VacancyResponse;
 import ru.smbr.hackathon.model.VacancyEntity;
 import ru.smbr.hackathon.repository.VacancyRepository;
 import ru.smbr.hackathon.service.VacancyService;
 import ru.smbr.hackathon.util.mapper.VacancyMapper;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
 @AllArgsConstructor
 public class VacancyServiceImpl implements VacancyService {
 
@@ -25,39 +23,43 @@ public class VacancyServiceImpl implements VacancyService {
     private final VacancyMapper vacancyMapper;
 
     @Override
-    public VacancyRespDTO create(VacancyReqDTO vacancyRequest) {
+    public VacancyResponse create(VacancyRequest vacancyRequest) {
 
         VacancyEntity newVacancy = vacancyMapper.toVacancyEntity(vacancyRequest);
         vacancyRepository.save(newVacancy);
-        return vacancyMapper.toVacancyRespDTO(newVacancy);
+        return vacancyMapper.toVacancyResponse(newVacancy);
 
     }
 
     @Override
-    public VacancyRespDTO getById(UUID id) {
+    public VacancyResponse getById(UUID id) {
 
         VacancyEntity vacancy = vacancyRepository
                 .findById(id)
                 .orElseThrow();
 
-        return vacancyMapper.toVacancyRespDTO(vacancy);
+        return vacancyMapper.toVacancyResponse(vacancy);
     }
 
     @Override
-    public List<VacancyRespDTO> getAll(int page, int size) {
+    public PageOfListResponse<VacancyResponse> getAll(int page, int size) {
 
-        Page<VacancyEntity> vacancies = vacancyRepository.findAll(PageRequest.of(page, size));
-        return vacancyMapper.toVacancyResponseList(vacancies.getContent());
+        Page<VacancyEntity> pageOfVacancies = vacancyRepository.findAll(PageRequest.of(page, size));
+        return PageOfListResponse.<VacancyResponse>builder()
+                .elements(vacancyMapper.toVacancyResponseList(pageOfVacancies.getContent()))
+                .size(size)
+                .totalPage(pageOfVacancies.getTotalPages())
+                .build();
     }
 
     @Override
-    public VacancyRespDTO update(VacancyReqDTO vacancyRequest, UUID id) {
+    public VacancyResponse update(VacancyRequest vacancyRequest, UUID id) {
 
         VacancyEntity vacancyToUpdate = vacancyRepository
                 .findById(id)
                 .get();
         vacancyMapper.updateVacancyEntity(vacancyToUpdate, vacancyRequest);
-        return vacancyMapper.toVacancyRespDTO(vacancyToUpdate);
+        return vacancyMapper.toVacancyResponse(vacancyToUpdate);
     }
 
     @Override
