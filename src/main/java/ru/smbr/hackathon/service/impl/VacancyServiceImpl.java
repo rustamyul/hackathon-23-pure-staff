@@ -1,6 +1,7 @@
 package ru.smbr.hackathon.service.impl;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import ru.smbr.hackathon.util.mapper.VacancyMapper;
 
 import java.util.UUID;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class VacancyServiceImpl implements VacancyService {
@@ -27,6 +29,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public VacancyResponse create(VacancyRequest vacancyRequest) {
 
+        log.info("#create: Create vacancy, job-title - {}", vacancyRequest.getJobTitle());
         VacancyEntity newVacancy = vacancyMapper.toVacancyEntity(vacancyRequest);
         vacancyRepository.save(newVacancy);
         return vacancyMapper.toVacancyResponse(newVacancy);
@@ -36,6 +39,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public VacancyResponse getById(UUID id) {
 
+        log.info("#getById: Get vacancy by id, id - {}", id);
         VacancyEntity vacancy = vacancyRepository
                 .findById(id)
                 .orElseThrow(() -> new ApplicationNotFoundException("getById",
@@ -47,6 +51,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public PageOfListResponse<VacancyResponse> getAll(int page, int size) {
 
+        log.info("#getAll: Get all vacancies, page - {}, size - {}", page, size);
         Page<VacancyEntity> pageOfVacancies = vacancyRepository.findAll(PageRequest.of(page, size));
         return PageOfListResponse.<VacancyResponse>builder()
                 .elements(vacancyMapper.toVacancyResponseList(pageOfVacancies.getContent()))
@@ -58,6 +63,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public VacancyResponse update(VacancyRequest vacancyRequest, UUID id) {
 
+        log.info("#update: Update vacancy, id - {}", id);
         VacancyEntity vacancyToUpdate = vacancyRepository
                 .findById(id)
                 .orElseThrow(() -> new ApplicationNotFoundException("update",
@@ -69,6 +75,8 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public DeleteResponse delete(UUID id) {
+
+        log.info("#delete: Delete vacancy by id, id - {}", id);
         try {
             vacancyRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {

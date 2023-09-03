@@ -1,6 +1,7 @@
 package ru.smbr.hackathon.service.impl;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import ru.smbr.hackathon.util.mapper.CompanyMapper;
 
 import java.util.UUID;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
@@ -27,6 +29,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyResponse create(CompanyRequest companyRequest) {
 
+        log.info("#create: Create company, company-title - {}", companyRequest.getName());
         CompanyEntity newCompany = companyMapper.toCompanyEntity(companyRequest);
         companyRepository.save(newCompany);
         return companyMapper.toCompanyResponse(newCompany);
@@ -35,6 +38,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyResponse getById(UUID id) {
 
+        log.info("#getById: Get company by id, id - {}", id);
         CompanyEntity company = companyRepository
                 .findById(id)
                 .orElseThrow(() -> new ApplicationNotFoundException("getById",
@@ -46,6 +50,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public PageOfListResponse<CompanyResponse> getAll(int page, int size) {
 
+        log.info("#getAll: Get all companies, page - {}, size - {}", page, size);
         Page<CompanyEntity> pageOfCompanies = companyRepository.findAll(PageRequest.of(page, size));
         return PageOfListResponse.<CompanyResponse>builder()
                 .elements(companyMapper.toСompanyResponseList(pageOfCompanies.getContent()))
@@ -57,6 +62,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyResponse update(CompanyRequest companyRequest, UUID id) {
 
+        log.info("#update: Update company, id - {}", id);
         CompanyEntity companyToUpdate = companyRepository
                 .findById(id)
                 .orElseThrow(() -> new ApplicationNotFoundException("update",
@@ -68,6 +74,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public DeleteResponse delete(UUID id) {
+
+        log.info("#delete: Delete company by id, id - {}", id);
         try {
             companyRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {

@@ -1,6 +1,7 @@
 package ru.smbr.hackathon.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.smbr.hackathon.api.dto.response.MatchesResponse;
@@ -21,6 +22,7 @@ import ru.smbr.hackathon.util.mapper.VacancyMapper;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MatchesServiceImpl implements MatchesService {
@@ -35,6 +37,7 @@ public class MatchesServiceImpl implements MatchesService {
     @Override
     public MatchesResponse<VacancyResponse> getResultWithVacancy(UUID staffId, UUID vacancyId) {
 
+        log.info("#getResultWithVacancy: Get matches result with vacancy, staff-id - {}, vacancy-id - {}", staffId, vacancyId);
         VacancyEntity vacancy = vacancyRepository.findById(vacancyId)
                 .orElseThrow(() -> new ApplicationNotFoundException("getResultWithVacancy",
                         "VacancyEntity not found, vacancy-id - " + vacancyId));
@@ -71,6 +74,7 @@ public class MatchesServiceImpl implements MatchesService {
     @Override
     public MatchesResponse<StaffResponse> getResultWithStaff(UUID vacancyId, UUID staffId) {
 
+        log.info("#getResultWithStaff: Get matches result with staff, staff-id - {}, vacancy-id - {}", staffId, vacancyId);
         StaffEntity staff = staffRepository.findById(staffId)
                 .orElseThrow(() -> new ApplicationNotFoundException("getResultWithStaff",
                         "StaffEntity not found, staff-id - " + staffId));
@@ -106,6 +110,7 @@ public class MatchesServiceImpl implements MatchesService {
     @Override
     public Optional<MatchesEntity> getMatchesEntity(UUID vacancyId, UUID staffId) {
 
+        log.info("#getMatchesEntity: Get MatchesEntity by matches-key, staff-id - {}, vacancy-id - {}", staffId, vacancyId);
         MatchesKey key = MatchesKey.builder()
                 .staffId(staffId)
                 .vacancyId(vacancyId)
