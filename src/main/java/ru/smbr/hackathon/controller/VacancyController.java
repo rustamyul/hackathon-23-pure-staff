@@ -1,8 +1,6 @@
 package ru.smbr.hackathon.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.smbr.hackathon.api.controller.VacancyApi;
 import ru.smbr.hackathon.api.dto.request.VacancyRequest;
@@ -20,47 +18,27 @@ public class VacancyController implements VacancyApi {
     private final VacancyService vacancyService;
 
     @Override
-    public ResponseEntity<VacancyResponse> create(VacancyRequest vacancyDTO) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Access-Control-Allow-Origin", "*");
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .body(vacancyService.create(vacancyDTO));
+    public VacancyResponse create(VacancyRequest vacancyDTO) {
+        return vacancyService.create(vacancyDTO);
     }
 
     @Override
-    public ResponseEntity<VacancyResponse> getById(UUID id) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Access-Control-Allow-Origin", "*");
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .body(vacancyService.getById(id));
+    public VacancyResponse getById(UUID id) {
+        return vacancyService.getById(id);
     }
 
     @Override
-    public ResponseEntity<PageOfListResponse<VacancyResponse>> getAll(int page, int size) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Access-Control-Allow-Origin", "*");
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .body(vacancyService.getAll(page, size));
+    public PageOfListResponse<VacancyResponse> getAll(int page, int size) {
+        return vacancyService.getAll(page, size);
     }
 
     @Override
-    public ResponseEntity<VacancyResponse> update(VacancyRequest vacancyDTO, UUID id) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Access-Control-Allow-Origin", "*");
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .body(vacancyService.update(vacancyDTO, id));
+    public VacancyResponse update(VacancyRequest vacancyDTO, UUID id) {
+        return vacancyService.update(vacancyDTO, id);
     }
 
     @Override
-    public ResponseEntity<DeleteResponse> delete(UUID id) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Access-Control-Allow-Origin", "*");
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .body(vacancyService.delete(id));
+    public DeleteResponse delete(UUID id) {
+        return vacancyService.delete(id);
     }
 }

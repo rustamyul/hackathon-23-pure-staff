@@ -1,6 +1,5 @@
 package ru.smbr.hackathon.api.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.smbr.hackathon.api.dto.response.MatchesResponse;
 import ru.smbr.hackathon.api.dto.response.StaffResponse;
@@ -14,10 +13,12 @@ import static org.springframework.http.HttpStatus.OK;
 public interface MatchesApi {
 
     @GetMapping("/result-with-vacancy/{vacancy_id}")
-    ResponseEntity<MatchesResponse<VacancyResponse>> getResultWithVacancy(@RequestHeader("staff_id") UUID staffId,
+    @ResponseStatus(OK)
+    MatchesResponse<VacancyResponse> getResultWithVacancy(@RequestHeader("staff_id") UUID staffId,
                                                           @PathVariable("vacancy_id") UUID vacancyId);
 
     @GetMapping("/result-with-staff/{staff_id}")
-    ResponseEntity<MatchesResponse<StaffResponse>> getResultWithStaff(@RequestHeader("vacancy_id") UUID vacancyId,
-                                                                      @PathVariable("staff_id") UUID staffId);
+    @ResponseStatus(OK)
+    MatchesResponse<StaffResponse> getResultWithStaff(@RequestHeader("vacancy_id") UUID vacancyId,
+                                                      @PathVariable("staff_id") UUID staffId);
 }
