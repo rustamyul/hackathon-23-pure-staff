@@ -1,6 +1,8 @@
 package ru.smbr.hackathon.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.smbr.hackathon.api.controller.MatchesApi;
 import ru.smbr.hackathon.api.dto.response.MatchesResponse;
@@ -17,12 +19,20 @@ public class MatchesController implements MatchesApi {
     private final MatchesService matchesService;
 
     @Override
-    public MatchesResponse<VacancyResponse> getResultWithVacancy(UUID staffId, UUID vacancyId) {
-        return matchesService.getResultWithVacancy(staffId, vacancyId);
+    public ResponseEntity<MatchesResponse<VacancyResponse>> getResultWithVacancy(UUID staffId, UUID vacancyId) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(matchesService.getResultWithVacancy(staffId, vacancyId));
     }
 
     @Override
-    public MatchesResponse<StaffResponse> getResultWithStaff(UUID vacancyId, UUID staffId) {
-        return matchesService.getResultWithStaff(vacancyId, staffId);
+    public ResponseEntity<MatchesResponse<StaffResponse>> getResultWithStaff(UUID vacancyId, UUID staffId) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(matchesService.getResultWithStaff(vacancyId, staffId));
     }
 }

@@ -1,6 +1,8 @@
 package ru.smbr.hackathon.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.smbr.hackathon.api.controller.CompanyApi;
 import ru.smbr.hackathon.api.dto.request.CompanyRequest;
@@ -18,27 +20,47 @@ public class CompanyController implements CompanyApi {
     private final CompanyService companyService;
 
     @Override
-    public CompanyResponse create(CompanyRequest companyDTO) {
-        return companyService.create(companyDTO);
+    public ResponseEntity<CompanyResponse> create(CompanyRequest companyDTO) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(companyService.create(companyDTO));
     }
 
     @Override
-    public CompanyResponse getById(UUID id) {
-        return companyService.getById(id);
+    public ResponseEntity<CompanyResponse> getById(UUID id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(companyService.getById(id));
     }
 
     @Override
-    public PageOfListResponse<CompanyResponse> getAll(int page, int size) {
-        return companyService.getAll(page, size);
+    public ResponseEntity<PageOfListResponse<CompanyResponse>> getAll(int page, int size) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(companyService.getAll(page, size));
     }
 
     @Override
-    public CompanyResponse update(CompanyRequest companyDTO, UUID id) {
-        return companyService.update(companyDTO, id);
+    public ResponseEntity<CompanyResponse> update(CompanyRequest companyDTO, UUID id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(companyService.update(companyDTO, id));
     }
 
     @Override
-    public DeleteResponse delete(UUID id) {
-        return companyService.delete(id);
+    public ResponseEntity<DeleteResponse> delete(UUID id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(companyService.delete(id));
     }
 }
