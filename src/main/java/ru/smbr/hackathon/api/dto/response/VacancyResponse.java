@@ -22,5 +22,7 @@ public class VacancyResponse {
 
     private Integer payFork;
 
+    private String photo;
+
     private CompanyResponse company;
 }

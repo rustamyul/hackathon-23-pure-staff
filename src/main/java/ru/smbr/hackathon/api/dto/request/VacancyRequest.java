@@ -17,5 +17,7 @@ public class VacancyRequest {
 
     private List<String> requirements;
 
+    private String photo;
+
     private Integer payFork;
 }

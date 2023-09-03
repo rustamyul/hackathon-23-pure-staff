@@ -29,6 +29,9 @@ public class VacancyEntity extends AbstractEntity{
     @Column(name = "pay_fork")
     private Integer payFork;
 
+    @Column(name = "photo")
+    private String photo;
+
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
