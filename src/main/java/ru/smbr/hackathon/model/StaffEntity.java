@@ -4,8 +4,10 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Getter
@@ -29,6 +31,7 @@ public class StaffEntity extends AbstractEntity {
     @Column(name = "photo")
     private String photo;
 
+    @ElementCollection
     @Column(name = "technology_stacks")
-    private String[] technologyStacks;
+    private List<String> technologyStacks;
 }

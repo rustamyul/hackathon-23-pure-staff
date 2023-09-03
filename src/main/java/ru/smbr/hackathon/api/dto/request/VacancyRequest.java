@@ -2,6 +2,8 @@ package ru.smbr.hackathon.api.dto.request;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -13,7 +15,7 @@ public class VacancyRequest {
 
     private String specialization;
 
-    private String[] requirements;
+    private List<String> requirements;
 
     private Integer payFork;
 }

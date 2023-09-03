@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Getter
@@ -21,8 +22,9 @@ public class VacancyEntity extends AbstractEntity{
     @Column(name = "specialization")
     private String specialization;
 
+    @ElementCollection
     @Column(name = "requirements")
-    private String[] requirements;
+    private List<String> requirements;
 
     @Column(name = "pay_fork")
     private Integer payFork;

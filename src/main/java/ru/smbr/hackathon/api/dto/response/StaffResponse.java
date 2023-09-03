@@ -2,7 +2,7 @@ package ru.smbr.hackathon.api.dto.response;
 
 import lombok.*;
 
-import javax.persistence.Column;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -22,5 +22,5 @@ public class StaffResponse {
 
     private String photo;
 
-    private String[] technologyStack;
+    private List<String> technologyStack;
 }

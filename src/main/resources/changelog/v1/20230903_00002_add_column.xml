@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="4" author="rustam.yuldashev" context="Delete columns">
+        <dropColumn tableName="staff" columnName="technology_stacks"/>
+        <dropColumn tableName="vacancy" columnName="requirements"/>
+        <createTable tableName="staff_entity_technology_stacks">
+            <column name="staff_entity_id" type="uuid">
+                <constraints foreignKeyName="FK_staff_entity_technology_stacks_id"
+                             referencedTableName="staff"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="technology_stacks" type="varchar"/>
+        </createTable>
+        <createTable tableName="vacancy_entity_requirements">
+            <column name="vacancy_entity_id" type="uuid">
+                <constraints foreignKeyName="FK_vacancy_entity_requirements_id"
+                             referencedTableName="vacancy"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="requirements" type="varchar"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

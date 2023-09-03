@@ -2,6 +2,7 @@ package ru.smbr.hackathon.api.dto.response;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -17,7 +18,7 @@ public class VacancyResponse {
 
     private String specialization;
 
-    private String[] requirements;
+    private List<String> requirements;
 
     private Integer payFork;
 

@@ -2,6 +2,8 @@ package ru.smbr.hackathon.api.dto.request;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -17,5 +19,5 @@ public class StaffRequest {
 
     private String photo;
 
-    private String technologyStack;
+    private List<String> technologyStack;
 }
