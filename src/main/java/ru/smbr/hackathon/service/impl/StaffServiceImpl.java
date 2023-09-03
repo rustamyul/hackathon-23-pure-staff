@@ -1,6 +1,7 @@
 package ru.smbr.hackathon.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -67,13 +68,12 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public DeleteResponse delete(UUID id) {
-
-        StaffEntity staffToDelete = staffRepository
-                .findById(id)
-                .orElseThrow(() -> new ApplicationNotFoundException("delete",
-                        "StaffEntity not found, staff-id - " + id));
-
-        staffRepository.delete(staffToDelete);
+        try {
+            staffRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ApplicationNotFoundException("delete",
+                    "StaffEntity not found, staff-id - " + id);
+        }
         return new DeleteResponse();
     }
 }

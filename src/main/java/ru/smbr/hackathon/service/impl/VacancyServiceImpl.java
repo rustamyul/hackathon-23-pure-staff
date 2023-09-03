@@ -1,6 +1,7 @@
 package ru.smbr.hackathon.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -68,13 +69,12 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public DeleteResponse delete(UUID id) {
-
-        VacancyEntity vacancyToDelete = vacancyRepository
-                .findById(id)
-                .orElseThrow(() -> new ApplicationNotFoundException("delete",
-                        "VacancyEntity not found, vacancy-id - " + id));
-
-        vacancyRepository.delete(vacancyToDelete);
+        try {
+            vacancyRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ApplicationNotFoundException("delete",
+                    "VacancyEntity not found, vacancy-id - " + id);
+        }
         return new DeleteResponse();
     }
 }

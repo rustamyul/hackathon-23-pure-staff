@@ -1,6 +1,7 @@
 package ru.smbr.hackathon.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,6 @@ import ru.smbr.hackathon.repository.CompanyRepository;
 import ru.smbr.hackathon.service.CompanyService;
 import ru.smbr.hackathon.util.mapper.CompanyMapper;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -68,13 +68,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public DeleteResponse delete(UUID id) {
-
-        CompanyEntity companyToDelete = companyRepository
-                .findById(id)
-                .orElseThrow(() -> new ApplicationNotFoundException("delete",
-                        "CompanyEntity not found, company-id - " + id));
-
-        companyRepository.delete(companyToDelete);
+        try {
+            companyRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ApplicationNotFoundException("delete",
+                    "Vacancy not found, vacancy-id - " + id);
+        }
         return new DeleteResponse();
     }
 }

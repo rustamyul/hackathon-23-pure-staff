@@ -44,24 +44,26 @@ public class MatchesServiceImpl implements MatchesService {
                     "StaffEntity not found, staff-id - " + staffId);
         }
 
-        Optional<MatchesEntity> matches = getMatchesEntity(vacancyId, staffId);
+        Optional<MatchesEntity> matchesEntity = getMatchesEntity(vacancyId, staffId);
 
-        if (matches.isPresent()) {
-            matches.get().setVacancyIsLike(true);
+        MatchesEntity matches;
+        if (matchesEntity.isPresent()) {
+            matches = matchesEntity.get();
+            matches.setVacancyIsLike(true);
         } else {
-            matches = Optional.of(MatchesEntity.builder()
+            matches = MatchesEntity.builder()
                     .matchesKey(MatchesKey.builder()
                             .vacancyId(vacancyId)
                             .staffId(staffId)
                             .build())
                     .vacancyIsLike(true)
-                    .build());
-            matchesRepository.save(matches.get());
+                    .build();
+            matchesRepository.save(matches);
         }
 
         return MatchesResponse.<VacancyResponse>builder()
                 .entity(vacancyMapper.toVacancyResponse(vacancy))
-                .isMatches(matches.get().isVacancyIsLike() == matches.get().isStaffIsLike())
+                .isMatches(isMutualSympathy(matches))
                 .build();
     }
 
@@ -78,24 +80,26 @@ public class MatchesServiceImpl implements MatchesService {
                     "VacancyEntity not found, vacancy-id - " + vacancyId);
         }
 
-        Optional<MatchesEntity> matches = getMatchesEntity(vacancyId, staffId);
+        Optional<MatchesEntity> matchesEntity = getMatchesEntity(vacancyId, staffId);
 
-        if (matches.isPresent()) {
-            matches.get().setStaffIsLike(true);
+        MatchesEntity matches;
+        if (matchesEntity.isPresent()) {
+            matches = matchesEntity.get();
+            matches.setStaffIsLike(true);
         } else {
-            matches = Optional.of(MatchesEntity.builder()
+            matches = MatchesEntity.builder()
                     .matchesKey(MatchesKey.builder()
                             .vacancyId(vacancyId)
                             .staffId(staffId)
                             .build())
                     .staffIsLike(true)
-                    .build());
-            matchesRepository.save(matches.get());
+                    .build();
+            matchesRepository.save(matches);
         }
 
         return MatchesResponse.<StaffResponse>builder()
                 .entity(staffMapper.toStaffResponse(staff))
-                .isMatches(matches.get().isVacancyIsLike() == matches.get().isStaffIsLike())
+                .isMatches(isMutualSympathy(matches))
                 .build();
     }
 
@@ -107,5 +111,10 @@ public class MatchesServiceImpl implements MatchesService {
                 .vacancyId(vacancyId)
                 .build();
         return matchesRepository.findById(key);
+    }
+
+    @Override
+    public boolean isMutualSympathy(MatchesEntity matches) {
+        return (matches.isStaffIsLike() == matches.isVacancyIsLike()) && matches.isVacancyIsLike();
     }
 }

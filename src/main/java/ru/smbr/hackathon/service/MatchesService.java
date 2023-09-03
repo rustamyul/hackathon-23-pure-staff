@@ -15,4 +15,6 @@ public interface MatchesService {
     MatchesResponse<StaffResponse> getResultWithStaff(UUID vacancyId, UUID staffId);
 
     Optional<MatchesEntity> getMatchesEntity(UUID vacancyId, UUID staffId);
+
+    boolean isMutualSympathy(MatchesEntity matches);
 }
