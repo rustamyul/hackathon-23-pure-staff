@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="6" author="rustam.yuldashev" context="Delete columns">
+        <sql>
+            INSERT INTO company(id, name, rating, specialization, description, url, foundation)
+            VALUES ('529ef4e0-7e84-43a4-b900-225f127a240b', 'Tech Solutions', 5.0, 'IT', 'Создание и продажа облачных сервисов для хранения и обработки данных.', 'http', 2020),
+                   ('97222a83-9be0-4460-a1d9-b265d1adfb9c', 'Digital Idea', 5.0, 'IT', 'Создание и поддержка сайтов и приложений для мобильных устройств', 'http', 2020),
+                   ('4e5ec861-a892-4597-b1c7-03e43d55373f', 'Cyber Security', 5.0, 'IT', 'Разработка программного обеспечения в сфере безопасности данных', 'http', 2020),
+                   ('6132ad63-3cfb-4e36-bf94-47853f7333f1', 'Cloud Innovations', 5.0, 'IT', 'Разработка и продажа программного обеспечения для бизнеса.', 'http', 2020);
+
+            INSERT INTO staff(id, name, specialization, about_me, photo)
+            VALUES ('b788984a-2b36-4df8-9f03-e055de71cdb3', 'Максим', 'Back-end разработчик', 'опыт работы в области бэкэнд-разработки более 5 лет, знание
+языков программирования PHP, Python, Java, опыт работы с базами данных
+MySQL, MongoDB, опыт работы над проектами различной сложности,
+умение работать в команде.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/10.jpg'),
+                   ('c4f54b10-4e7b-4ec9-be0a-08072f46468c', 'Анна', 'Тестировщик', 'опыт работы тестировщиком более 3 лет, знание основных
+методологий тестирования, опыт работы на проектах различной
+сложности, знание языков программирования Java, JavaScript, опыт работы
+в команде, умение анализировать и обрабатывать данные.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/8.jpg'),
+                   ('c3d351d7-2054-488b-9227-a530e4ad157a', 'Сергей', 'Data аналитик', 'опыт работы аналитиком более 6 лет, знания в области Data
+Analysis, Data Mining, Machine Learning, опыт работы со статистическими
+пакетами, такими как R, SAS, опыт работы в проектах различной
+сложности.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/9.jpg'),
+                   ('70259b10-e6c2-4e2b-ab83-e81c693d01b1', 'Александр', 'Системный администратор', 'опыт работы системным администратором более 8 лет, опыт
+настройки и обслуживания серверов и сетевого оборудования, знание
+операционных систем Windows и Linux, опыт работы с СУБД Oracle, MySQL и
+PostgreSQL, умение решать проблемы и обеспечивать стабильную работу
+систем', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/3.jpg'),
+                   ('05d3f941-11d4-45e9-813d-80645f4d8def', 'Николай', 'разработка мобильных приложений', 'опыт разработки мобильных приложений более 4 лет, знание
+языков программирования Kotlin, Java, Android Studio, опыт работы с
+фреймворками React Native, Flutter, опыт работы над различными
+проектами, включая приложения для Android и iOS.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/2.jpg'),
+                   ('c857ea87-5d9b-4f26-bb23-e828eeb71693', 'Алексей', 'Project manager', 'О себе: более 10 лет опыта работы в IT-индустрии, опыт управления
+проектами различной сложности и масштаба, знание методологии
+Agile/Scrum, опыт работы с Jira, Confluence, опыт работы руководителем
+команды разработчиков и тестировщиков, умение принимать решения и
+мотивировать команду.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/4.jpg'),
+                   ('4eeb7e8c-ce61-43b3-b941-5fdd19fe14ae', 'Денис', 'DevOps', 'более 7 лет опыта в области DevOps, опыт работы с инструментами
+автоматизации и оркестрации, такими как Ansible, Docker, Kubernetes, опыт
+работы с системами контроля версий Git, опыт работы с облачными
+платформами, такими как AWS, Azure, Google Cloud.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/6.jpg'),
+                   ('9a340208-f7ac-4e51-b332-0f9856cc7194', 'Мария', 'Веб-дизайнер', 'опыт веб-дизайна более 5 лет, знания HTML, CSS, JavaScript, опыта
+работы с Figma, Adobe Photoshop, опыт работы над дизайном сайтов
+различной сложности, опыт создания адаптивного дизайна и опыт работы
+с SEO.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/7.jpg'),
+                   ('26dbc187-ef32-4600-a1b8-99931d98b334', 'Ольга', 'QA', 'опыт работы QA более 3 лет, знания основных методологий и
+инструментов тестирования, опыт тестирования веб-приложений и
+мобильных приложений, опыт работы с автоматизированными
+инструментами тестирования, такие как Selenium, опыт работы в Agile-
+команде, умение находить и исправлять ошибки.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/5.jpg'),
+                   ('cbcc61c2-ffb2-4536-9ea9-9c9852b19f66', 'Андрей', 'информационная безопасность', 'опыт в области информационной безопасности более 12 лет,
+знания и опыт в области сетевой безопасности, информационной
+безопасности приложений, криптографии, опыт работы с SIEM-системами,
+опыт проведения аудитов безопасности, опыт работы с документацией по
+безопасности.', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/staff-photos/1.jpg');
+
+            INSERT INTO vacancy(id, specialization, job_title, pay_fork, company_id, photo)
+            VALUES ('9a2b6675-2a43-4b72-b733-8d0895183698', 'Backend', 'Backend-разработчик', 80000, '529ef4e0-7e84-43a4-b900-225f127a240b', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/1.jpg'),
+                   ('ab74d4b4-c224-49c0-bf27-1aa67d1c5e5f', 'Аналитик', 'старший аналитик', 300000, '6132ad63-3cfb-4e36-bf94-47853f7333f1', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/4.jpg'),
+                   ('29fbcaa5-0e3c-47f2-95cf-49df3f69cb94', 'Тестировщик', 'midle тестировщик', 120000, '97222a83-9be0-4460-a1d9-b265d1adfb9c', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/2.jpg'),
+                   ('c6751f67-f8d1-416b-8655-8f405032c3f5', 'Фронтенд-разработчик', 'Проектирование и разработка пользовательского интерфейса', 80000, '4e5ec861-a892-4597-b1c7-03e43d55373f', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/3.jpg'),
+                   ('49ff4f0e-1fa6-483b-9c47-ddc40d6f7abc', 'DevOps-инженер', 'Автоматизация процессов разработки и эксплуатации программного
+        обеспечения. Навыки: администрирование серверов, автоматизация тестирования, DevOps-
+        практики', 60000, '4e5ec861-a892-4597-b1c7-03e43d55373f', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/3.jpg'),
+                   ('c150da74-c89f-4ecc-b3c1-9fb71845349a', 'Архитектор программного обеспечения', 'Создание архитектуры программного обеспечения и планирование его
+        развития', 800000, '4e5ec861-a892-4597-b1c7-03e43d55373f', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/3.jpg'),
+                   ('5e7df562-9ada-417a-8784-a57de4e6553a', 'Backend', 'Backend-разработчик', 100000, '529ef4e0-7e84-43a4-b900-225f127a240b', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/1.jpg'),
+                   ('5ffa9d57-d2d6-4b3c-ba3f-19e10b3a7f4a', 'Тестировщик', 'midle тестировщик', 180000, '97222a83-9be0-4460-a1d9-b265d1adfb9c', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/2.jpg'),
+                   ('a606db5b-10bc-42e0-a2ee-06f170c3254e', 'Аналитик', 'старший аналитик', 70000, '6132ad63-3cfb-4e36-bf94-47853f7333f1', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/4.jpg'),
+                   ('a0f5bf69-c5e7-4fb4-b10e-6a67da5dc52a', 'Исследование и анализ рынка', 'Бизнес-аналитик', 60000, '6132ad63-3cfb-4e36-bf94-47853f7333f1', 'https://cloud.mail.ru/public/LdCP/Exo9vEuh1/company-logos/4.jpg');
+
+            INSERT INTO staff_entity_technology_stacks(staff_entity_id, technology_stacks)
+            VALUES ('b788984a-2b36-4df8-9f03-e055de71cdb3', 'Java'),
+                   ('b788984a-2b36-4df8-9f03-e055de71cdb3', 'Python'),
+                   ('b788984a-2b36-4df8-9f03-e055de71cdb3', 'JavaScript'),
+                   ('c4f54b10-4e7b-4ec9-be0a-08072f46468c', 'C#'),
+                   ('c4f54b10-4e7b-4ec9-be0a-08072f46468c', 'Ruby'),
+                   ('c3d351d7-2054-488b-9227-a530e4ad157a', 'PHP'),
+                   ('70259b10-e6c2-4e2b-ab83-e81c693d01b1', 'C++'),
+                   ('70259b10-e6c2-4e2b-ab83-e81c693d01b1', 'SQL'),
+                   ('70259b10-e6c2-4e2b-ab83-e81c693d01b1', 'Swift'),
+                   ('05d3f941-11d4-45e9-813d-80645f4d8def', 'Go'),
+                   ('05d3f941-11d4-45e9-813d-80645f4d8def', 'Kotlin'),
+                   ('05d3f941-11d4-45e9-813d-80645f4d8def', 'R'),
+                   ('05d3f941-11d4-45e9-813d-80645f4d8def', 'Perl'),
+                   ('c857ea87-5d9b-4f26-bb23-e828eeb71693', 'TypeScript'),
+                   ('c857ea87-5d9b-4f26-bb23-e828eeb71693', 'Scala'),
+                   ('4eeb7e8c-ce61-43b3-b941-5fdd19fe14ae', 'HTML/CSS'),
+                   ('9a340208-f7ac-4e51-b332-0f9856cc7194', 'React'),
+                   ('9a340208-f7ac-4e51-b332-0f9856cc7194', 'Angular'),
+                   ('9a340208-f7ac-4e51-b332-0f9856cc7194', 'Node.js'),
+                   ('26dbc187-ef32-4600-a1b8-99931d98b334', 'Django'),
+                   ('26dbc187-ef32-4600-a1b8-99931d98b334', 'Vue.js'),
+                   ('26dbc187-ef32-4600-a1b8-99931d98b334', 'Ruby on Rails'),
+                   ('cbcc61c2-ffb2-4536-9ea9-9c9852b19f66', 'TensorFlow'),
+                   ('cbcc61c2-ffb2-4536-9ea9-9c9852b19f66', 'PyTorch'),
+                   ('cbcc61c2-ffb2-4536-9ea9-9c9852b19f66', 'MongoDB');
+
+            INSERT INTO vacancy_entity_requirements(vacancy_entity_id, requirements)
+            VALUES ('9a2b6675-2a43-4b72-b733-8d0895183698', 'Java'),
+                   ('ab74d4b4-c224-49c0-bf27-1aa67d1c5e5f', 'Python'),
+                   ('29fbcaa5-0e3c-47f2-95cf-49df3f69cb94', 'JavaScript'),
+                   ('c6751f67-f8d1-416b-8655-8f405032c3f5', 'C#'),
+                   ('49ff4f0e-1fa6-483b-9c47-ddc40d6f7abc', 'Ruby'),
+                   ('9a2b6675-2a43-4b72-b733-8d0895183698', 'PHP'),
+                   ('ab74d4b4-c224-49c0-bf27-1aa67d1c5e5f', 'C++'),
+                   ('29fbcaa5-0e3c-47f2-95cf-49df3f69cb94', 'SQL'),
+                   ('c6751f67-f8d1-416b-8655-8f405032c3f5', 'Swift'),
+                   ('49ff4f0e-1fa6-483b-9c47-ddc40d6f7abc', 'Go'),
+                   ('5e7df562-9ada-417a-8784-a57de4e6553a', 'Kotlin'),
+                   ('5ffa9d57-d2d6-4b3c-ba3f-19e10b3a7f4a', 'R'),
+                   ('a606db5b-10bc-42e0-a2ee-06f170c3254e', 'Perl'),
+                   ('a0f5bf69-c5e7-4fb4-b10e-6a67da5dc52a', 'TypeScript'),
+                   ('5e7df562-9ada-417a-8784-a57de4e6553a', 'Scala'),
+                   ('5ffa9d57-d2d6-4b3c-ba3f-19e10b3a7f4a', 'HTML/CSS'),
+                   ('a606db5b-10bc-42e0-a2ee-06f170c3254e', 'React'),
+                   ('a0f5bf69-c5e7-4fb4-b10e-6a67da5dc52a', 'Angular'),
+                   ('c150da74-c89f-4ecc-b3c1-9fb71845349a', 'Node.js'),
+                   ('c150da74-c89f-4ecc-b3c1-9fb71845349a', 'Django'),
+                   ('c150da74-c89f-4ecc-b3c1-9fb71845349a', 'Vue.js'),
+                   ('c150da74-c89f-4ecc-b3c1-9fb71845349a', 'Ruby on Rails'),
+                   ('a0f5bf69-c5e7-4fb4-b10e-6a67da5dc52a', 'TensorFlow'),
+                   ('a0f5bf69-c5e7-4fb4-b10e-6a67da5dc52a', 'PyTorch'),
+                   ('a0f5bf69-c5e7-4fb4-b10e-6a67da5dc52a', 'MongoDB');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
